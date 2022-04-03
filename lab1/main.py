@@ -68,21 +68,24 @@ def sort_by_students_group(students):
 
 def search_gpa_by_students_group():
   groups_of_students = sort_by_students_group(student_list)
-  for s in groups_of_students:
-      matrix_of_grades = [stud.subject_grades for stud in groups_of_students.get(s)]
-      print('\nGPA for ' + s + ' group')
+  for group, value in groups_of_students.items():
+      matrix_of_grades = [stud.subject_grades for stud in value]
+      print('\nGPA for ' + group + ' group')
       search_average_score_by_matrix(matrix_of_grades)
 
 search_gpa_by_students_group()
 
+#### <--
+
 def search_best_student():
   groups_of_students = sort_by_students_group(student_list)
 
-  for s in groups_of_students:
-    total = [{stud.name: sum(stud.subject_grades)} for stud in groups_of_students.get(s)]
-    sorted_total = [sorted(total, key=lambda item: item[stud.name]) for stud in groups_of_students.get(s)]
-    print(sorted_total)
-    groups_of_students.update({s: sorted_total[0]})
+  for group, value in groups_of_students.items():
+    total = [{stud.name: sum(stud.subject_grades)} for stud in value]
+    
+    sorted_total = sorted(total, key=lambda item: item[item.keys()[0]], reverse=True)
+    
+    groups_of_students.update({group: sorted_total[0]})
 
   print('\nThe Best student in groups:')
   print(groups_of_students)
