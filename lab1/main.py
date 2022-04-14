@@ -45,7 +45,7 @@ sort_by_age(student_list)
 #### <--
 
 def search_average_score_by_matrix(matrix):
-  res = [sum(x) / len(matrix) for x in zip(*matrix)]
+  res = [round(sum(x) / len(matrix), 2) for x in zip(*matrix)]
   print(res)
 
 
@@ -83,7 +83,7 @@ def search_best_student():
   for group, value in groups_of_students.items():
     total = [{stud.name: sum(stud.subject_grades)} for stud in value]
     
-    sorted_total = sorted(total, key=lambda item: item[item.keys()[0]], reverse=True)
+    sorted_total = sorted(total, key=lambda item: item[list(item.keys())[0]], reverse=True)
     
     groups_of_students.update({group: sorted_total[0]})
 
